@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sensors</title>
+    <script>
+        function sendInfo(event) {
+            fetch('http://localhost:3000/info', {
+                method: 'POST',
+                body: JSON.stringify(
+                    event
+                ),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+        }
+
+        window.addEventListener('devicemotion', handleMotion)
+
+        function handleMotion(event) {
+            let output = document.getElementById('motion-output');
+            let properties = '';
+            for (let prop in event) {
+                if (prop === 'acceleration') {
+                    properties += prop + ' x: ' + event.acceleration.x + '<br>';
+                    properties += prop + ' y: ' + event.acceleration.y + '<br>';
+                    properties += prop + ' z: ' + event.acceleration.z + '<br>';
+                } else if (prop === 'accelerationIncludingGravity') {
+                    properties += prop + ' x: ' + event.accelerationIncludingGravity.x + '<br>';
+                    properties += prop + ' y: ' + event.accelerationIncludingGravity.y + '<br>';
+                    properties += prop + ' z: ' + event.accelerationIncludingGravity.z + '<br>';
+                } else if (prop === 'rotationRate') {
+                    properties += prop + ' alpha: ' + event.rotationRate.alpha + '<br>';
+                    properties += prop + ' beta: ' + event.rotationRate.beta + '<br>';
+                    properties += prop + ' gamma: ' + event.rotationRate.gamma + '<br>';
+                } else {
+                    properties += prop + ': ' + event[prop] + '<br>';
+                }
+            }
+            output.innerHTML = properties;
+
+            console.log(event);
+
+            const eventInfo = {
+                accelerationX: event.acceleration.x,
+                bubbles: event.bubbles
+            }
+            sendInfo(eventInfo);
+        }
+    </script>
+    <script>
+        window.addEventListener('deviceorientation', handleOrientation)
+
+        function handleOrientation(event) {
+            let output = document.getElementById('orientation-output');
+            let properties = '';
+            for (let prop in event) {
+                properties += prop + ': ' + event[prop] + '<br>';
+            }
+            output.innerHTML = properties;
+        }
+    </script>
+    <script>
+        /* function sendInfo(event) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:3000/info", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                value: event
+            }));
+        } */
+    </script>
+</head>
+
+<body>
+    <h2>MOTION OUTPUT</h2>
+    <div id="motion-output"></div>
+    <h2>ORIENTATION OUTPUT</h2>
+    <div id="orientation-output"></div>
+</body>
+
+</html>
