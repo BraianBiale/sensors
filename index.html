@@ -47,9 +47,9 @@
                 accelerationX: event.acceleration.x,
                 accelerationY: event.acceleration.y,
                 accelerationZ: event.acceleration.z,
-                accelerationIncludingGravityX: accelerationIncludingGravity.x,
-                accelerationIncludingGravityY: accelerationIncludingGravity.y,
-                accelerationIncludingGravityZ: accelerationIncludingGravity.z,
+                accelerationIncludingGravityX: event.accelerationIncludingGravity.x,
+                accelerationIncludingGravityY: event.accelerationIncludingGravity.y,
+                accelerationIncludingGravityZ: event.accelerationIncludingGravity.z,
             }
             sendInfo(eventInfo);
         }
