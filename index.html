@@ -24,7 +24,7 @@
             let properties = '';
             for (let prop in event) {
                 if (prop === 'acceleration') {
-                    properties += prop + ' x: ' + event.acceleration.x + '<br>';
+                    properties += prop + ' x,: ' + event.acceleration.x + '<br>';
                     properties += prop + ' y: ' + event.acceleration.y + '<br>';
                     properties += prop + ' z: ' + event.acceleration.z + '<br>';
                 } else if (prop === 'accelerationIncludingGravity') {
@@ -45,7 +45,11 @@
 
             const eventInfo = {
                 accelerationX: event.acceleration.x,
-                bubbles: event.bubbles
+                accelerationY: event.acceleration.y,
+                accelerationZ: event.acceleration.z,
+                accelerationIncludingGravityX: accelerationIncludingGravity.x,
+                accelerationIncludingGravityY: accelerationIncludingGravity.y,
+                accelerationIncludingGravityZ: accelerationIncludingGravity.z,
             }
             sendInfo(eventInfo);
         }
