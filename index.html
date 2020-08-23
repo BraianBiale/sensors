@@ -17,7 +17,9 @@
             })
         }
 
-        let eventInfo;
+        let motionInfo;
+        let orientationInfo;
+
 
         window.addEventListener('devicemotion', handleMotion)
 
@@ -43,7 +45,7 @@
             }
             output.innerHTML = properties;
 
-            eventInfo = {
+            motionInfo = {
                 accelerationX: event.acceleration.x,
                 accelerationY: event.acceleration.y,
                 accelerationZ: event.acceleration.z,
@@ -67,8 +69,7 @@
             }
             output.innerHTML = properties;
 
-            eventInfo = {
-                ...eventInfo,
+            orientationInfo = {
                 alpha: event.alpha,
                 beta: event.beta,
                 gamma: event.gamma,
@@ -76,7 +77,8 @@
         }
 
         setInterval(() => {
-            sendInfo(eventInfo);
+            sendInfo(motionInfo);
+            sendInfo(orientationInfo);
         }, 3000)
     </script>
 </head>
