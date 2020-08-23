@@ -6,7 +6,7 @@
     <title>Sensors</title>
     <script>
         function sendInfo(event) {
-            fetch(' https://e4e4c5104dad.ngrok.io/info', {
+            fetch('https://6bf712c8c14d.ngrok.io/info', {
                 method: 'POST',
                 body: JSON.stringify(
                     event
@@ -16,6 +16,8 @@
                 }
             })
         }
+
+        let eventInfo;
 
         window.addEventListener('devicemotion', handleMotion)
 
@@ -41,20 +43,20 @@
             }
             output.innerHTML = properties;
 
-            console.log(event);
-
-            const eventInfo = {
+            eventInfo = {
                 accelerationX: event.acceleration.x,
                 accelerationY: event.acceleration.y,
                 accelerationZ: event.acceleration.z,
                 accelerationIncludingGravityX: event.accelerationIncludingGravity.x,
                 accelerationIncludingGravityY: event.accelerationIncludingGravity.y,
                 accelerationIncludingGravityZ: event.accelerationIncludingGravity.z,
+                rotationRateAlpha: event.rotationRate.alpha,
+                rotationRateBeta: event.rotationRate.beta,
+                rotationRateGamma: event.rotationRate.gamma,
             }
-            sendInfo(eventInfo);
+
         }
-    </script>
-    <script>
+
         window.addEventListener('deviceorientation', handleOrientation)
 
         function handleOrientation(event) {
@@ -64,17 +66,18 @@
                 properties += prop + ': ' + event[prop] + '<br>';
             }
             output.innerHTML = properties;
+
+            eventInfo = {
+                ...eventInfo,
+                alpha: event.alpha,
+                beta: event.beta,
+                gamma: event.gamma,
+            }
         }
-    </script>
-    <script>
-        /* function sendInfo(event) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://localhost:3000/info", true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(JSON.stringify({
-                value: event
-            }));
-        } */
+
+        setInterval(() => {
+            sendInfo(eventInfo);
+        }, 2000)
     </script>
 </head>
 
