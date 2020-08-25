@@ -6,7 +6,7 @@
     <title>Sensors</title>
     <script>
         function sendInfo(event) {
-            fetch('https://fd70894d195b.ngrok.io/info', {
+            fetch('https://c4c5525ce2f4.ngrok.io/info', {
                 method: 'POST',
                 body: JSON.stringify(
                     event
@@ -19,6 +19,20 @@
 
         let eventInfo;
 
+        eventInfo = {
+            accelerationX: null,
+            accelerationY: null,
+            accelerationZ: null,
+            accelerationIncludingGravityX: null,
+            accelerationIncludingGravityY: null,
+            accelerationIncludingGravityZ: null,
+            rotationRateAlpha: null,
+            rotationRateBeta: null,
+            rotationRateGamma: null,
+            alpha: null,
+            beta: null,
+            gamma: null,
+        }
 
         window.addEventListener('devicemotion', handleMotion)
 
@@ -45,6 +59,7 @@
             output.innerHTML = properties;
 
             eventInfo = {
+                ...eventInfo,
                 accelerationX: event.acceleration.x,
                 accelerationY: event.acceleration.y,
                 accelerationZ: event.acceleration.z,
@@ -83,10 +98,10 @@
 </head>
 
 <body>
-    <h2>MOTION OUTPUT</h2>
-    <div id="motion-output"></div>
-    <h2>ORIENTATION OUTPUT</h2>
-    <div id="orientation-output"></div>
+<h2>MOTION OUTPUT</h2>
+<div id="motion-output"></div>
+<h2>ORIENTATION OUTPUT</h2>
+<div id="orientation-output"></div>
 </body>
 
 </html>
