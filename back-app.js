@@ -8,7 +8,7 @@ app.use(express.json())
 // Add headers
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'https://braianbiale.github.io');
-    //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
@@ -21,7 +21,8 @@ app.get('/', (req, res) => {
 })
 
 app.route('/info').post(function (req, res) {
-    console.log("info", req.body)
+    console.log(req.headers["user-agent"])
+    console.log("info", req.body, '\n')
     res.send({
         status: 'SUCCESS'
     });
