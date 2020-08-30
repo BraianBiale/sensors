@@ -20,9 +20,10 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
+count = 0
+
 app.route('/info').post(function (req, res) {
-    console.log(req.headers["user-agent"])
-    console.log("info", req.body, '\n')
+    console.log("info", count++, req.body, '\n')
     res.send({
         status: 'SUCCESS'
     });
