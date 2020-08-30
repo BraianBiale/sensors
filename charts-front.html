@@ -66,7 +66,7 @@
             function createSeries(s, name) {
                 var series = chart.series.push(new am4charts.LineSeries());
                 series.dataFields.valueY = "value" + s;
-                series.dataFields.dateX = "date";
+                series.dataFields.dateX = "time";
                 series.name = name;
 
                 var segment = series.segments.template;
@@ -99,7 +99,7 @@
                 let value = 0;
                 for (let i = 0; i < chartData.length; i++) {
                     value = chartData[i][name];
-                    let dataItem = {date: new Date(2020, 0, i)};
+                    let dataItem = {time: i};
                     dataItem["value" + s] = value;
                     data.push(dataItem);
                 }
